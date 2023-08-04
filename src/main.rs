@@ -1,3 +1,6 @@
+mod block;
+
+use block::{Block, Element};
 use std::{
     collections::{HashMap, HashSet},
     env,
@@ -11,58 +14,6 @@ enum ClassType {
     BlockMod,
     Element,
     ElementMod,
-}
-
-#[derive(Debug)]
-struct Block {
-    name: String,
-    mods: Vec<String>,
-    elements: Vec<Element>,
-}
-
-impl Block {
-    fn generate_scss(&self) -> String {
-        let mut result = String::new();
-
-        let block_mods_scss = self
-            .mods
-            .iter()
-            .map(|m| format!("\n   &--{} {{}}", m))
-            .collect::<Vec<String>>()
-            .join("");
-
-        let mut elements_scss = String::new();
-
-        for element in self.elements.iter() {
-            let scss = element.generate_scss();
-            elements_scss += &scss;
-        }
-
-        result = result + "." + &self.name + " {";
-        result = result + &block_mods_scss;
-        result = result + &elements_scss;
-        result = result + "\n}";
-        result
-    }
-}
-
-#[derive(Debug)]
-struct Element {
-    name: String,
-    mods: Vec<String>,
-}
-
-impl Element {
-    fn generate_scss(&self) -> String {
-        let element_mods_scss = self
-            .mods
-            .iter()
-            .map(|m| format!("\n   &--{} {{}} \n", m))
-            .collect::<Vec<String>>()
-            .join("");
-
-        format!("\n   &__{} {{{}}}", self.name, element_mods_scss)
-    }
 }
 
 fn main() {
