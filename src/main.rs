@@ -36,24 +36,18 @@ fn main() {
         .split(['<', '>'])
         .filter(|&s| s.contains("class=\""))
         .map(|s| {
-            s.split("class=\"")
-                .nth(1)
-                .expect(&format!(
-                    "Ошибка в поиске классов, ошибка при обработке: \n{:?}",
-                    s.replace(" ", "")
-                ))
-                .to_string()
+            s.split("class=\"").nth(1).expect(&format!(
+                "Ошибка в поиске классов, ошибка при обработке: \n{:?}",
+                s.replace(" ", "")
+            ))
         })
         .map(|s| {
-            s.split('"')
-                .nth(0)
-                .expect(&format!(
-                    "Ошибка в поиске классов, ошибка при обработке: \n{:?}",
-                    s.replace(" ", "")
-                ))
-                .to_string()
+            s.split('"').nth(0).expect(&format!(
+                "Ошибка в поиске классов, ошибка при обработке: \n{:?}",
+                s.replace(" ", "")
+            ))
         })
-        .collect::<HashSet<String>>()
+        .collect::<HashSet<&str>>()
         .into_iter()
         .map(|s| {
             s.split(' ')
@@ -70,7 +64,7 @@ fn main() {
         match define_class_type(&class) {
             ClassType::Block => {
                 blocks.entry(class.to_string()).or_insert(Block {
-                    name: class,
+                    name: class.to_string(),
                     mods: vec![],
                     elements: vec![],
                 });
