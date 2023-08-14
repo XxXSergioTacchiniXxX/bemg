@@ -18,14 +18,11 @@ jobs:
         toolchain: stable
 
     - name: Build Binary
-      run: cargo build --release
-
-    - name: Archive Binary
-      run: zip target/release/bemg.zip target/release/bemg
-
+      run: cargo build --release --all-features
+ 
     - name: Publish Binary
       uses: actions/upload-artifact@v2
       with:
         name: bemg
-        path: target/release/bemg.zip
+        path: target/release/bemg
 
