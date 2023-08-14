@@ -31,7 +31,6 @@ fn main() {
     file.read_to_string(&mut file_content)
         .expect("Не удалось прочитать файл");
 
-    file_content = file_content.replace("\n", "");
     let all_classes: Vec<_> = file_content
         .split(['<', '>'])
         .filter(|&s| s.contains("class=\""))
