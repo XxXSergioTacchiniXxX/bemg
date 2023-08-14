@@ -1,0 +1,31 @@
+name: Build and Publish Binary
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repo
+      uses: actions/checkout@v2
+
+    - name: Set up Rust
+      uses: actions-rs/toolchain@v1
+      with:
+        toolchain: stable
+
+    - name: Build Binary
+      run: cargo build --release
+
+    - name: Archive Binary
+      run: zip target/release/bemg.zip target/release/bemg
+
+    - name: Publish Binary
+      uses: actions/upload-artifact@v2
+      with:
+        name: bemg
+        path: target/release/bemg.zip
+
