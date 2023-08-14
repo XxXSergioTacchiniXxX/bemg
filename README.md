@@ -2,7 +2,7 @@
 Generation of scss BEM classes from html-like files.
 
 The simplest CLI utility that generates SCSS markup according to BEM notation. The utility accepts only one parameter - the path to the desired file. As a result, SCSS with blocks, elements and BEM modifiers is returned to the standard output.
-It works similarly to the functionality of YOU Helper.
+It works similarly to the functionality of [BEM Helper](https://marketplace.visualstudio.com/items?itemName=Box-Of-Hats.bemhelper).
 
 Example:
 
