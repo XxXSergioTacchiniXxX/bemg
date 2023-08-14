@@ -42,3 +42,4 @@ The following SCSS is obtained from this HTML:
 .input-text-1 {
 }
 ```
+This utility handles the single-file components of vue js and svelte well. JSX support is planned in the future.
